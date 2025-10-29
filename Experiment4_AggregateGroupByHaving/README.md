@@ -37,150 +37,188 @@ HAVING condition;
 ```
 
 **Question 1**
---
-<img width="997" height="522" alt="image" src="https://github.com/user-attachments/assets/c1f16dfa-0de7-48c6-b73e-97aa44fbec10" />
+Write a SQL query to  find the average salary of all employees?
+~~~
 
-```sql
-SELECT DoctorID,COUNT(*) AS TotalRecords
-FROM MedicalRecords
-GROUP BY DoctorID;
-```
+Table: employee
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+age         INTEGER
+city        TEXT
+income      INTEGER
+~~~
+~~~
+SELECT AVG(income) AS Average_Salary
+FROM employee;
+~~~
 
 **Output:**
 
-<img width="612" height="620" alt="image" src="https://github.com/user-attachments/assets/73001b8a-2706-4f59-a275-52be53198292" />
+![image](https://github.com/user-attachments/assets/fed8cfc8-41ca-4580-9e56-6997f450eaa5)
+
 
 **Question 2**
----
-<img width="1189" height="544" alt="image" src="https://github.com/user-attachments/assets/72be10a7-0bf0-4240-8a3d-2f1c0de3c2b6" />
+Write a SQL query to calculate the total number of working hours of all employees
 
-```sql
-SELECT Specialty,Gender, COUNT(*) AS TotalDoctors
-FROM Doctors
-GROUP BY Specialty,Gender ;
-```
+Sample table: employee1
+![image](https://github.com/user-attachments/assets/8670e8dc-537c-4836-b33f-fbfe31675d9d)
+~~~
+SELECT SUM(workhour) AS 'Total working hours'
+FROM  employee1;
+~~~
+
 
 **Output:**
 
-<img width="925" height="589" alt="image" src="https://github.com/user-attachments/assets/2e6f4808-7024-4e9b-b306-75b45ae301f6" />
+![image](https://github.com/user-attachments/assets/b4340e8f-832f-4fe7-951a-cc2a87aea425)
+
 
 **Question 3**
----
-<img width="974" height="648" alt="image" src="https://github.com/user-attachments/assets/1841ab68-570f-428a-8b4c-3b34694a23d7" />
+Write a SQL query to determine the number of customers who received at least one grade for their activity.
 
-```sql
-SELECT DoctorID,COUNT(*) AS TotalPrescriptions
-FROM Prescriptions
-GROUP BY DoctorID;
-```
+Sample table: customer
+~~~
+
+customer_id |   cust_name    |    city    | grade | salesman_id 
+
+-------------+----------------+------------+-------+-------------
+
+        3002 | Nick Rimando   | New York   |   100 |        5001
+
+        3007 | Brad Davis     | New York   |   200 |        5001
+
+        3005 | Graham Zusi    | California |   200 |        5002
+~~~
+~~~
+SELECT COUNT(customer_id) AS COUNT
+FROM customer
+WHERE grade IS NOT NULL;
+~~~
 
 **Output:**
+![image](https://github.com/user-attachments/assets/85c50c99-0953-4c04-815d-412ab6d079a3)
 
-<img width="748" height="722" alt="image" src="https://github.com/user-attachments/assets/0068823b-ed51-4b45-a961-ec6633e11dbe" />
+
 
 **Question 4**
----
-<img width="921" height="463" alt="image" src="https://github.com/user-attachments/assets/de7c2a2c-0003-40d2-976a-aef89b4d63aa" />
 
-```sql
-SELECT SUM(income) AS total_income
-FROM employee
-WHERE age>=40;
-```
+Write the SQL query that accomplishes the grouping of data by joining date (jdate), calculates the minimum work hours for each date, and excludes dates where the minimum work hour is not less than 10.
+Sample table: employee1
+
+~~~
+SELECT jdate,MIN(workhour) AS  'MIN(workhour)'
+FROM employee1
+GROUP BY jdate
+HAVING MIN(workhour) < 10;
+~~~
 
 **Output:**
 
-<img width="521" height="295" alt="image" src="https://github.com/user-attachments/assets/b64c78d3-41bd-4c9d-9bb1-741a1cc81054" />
+![image](https://github.com/user-attachments/assets/03b60ef7-4969-4337-abf5-34b06025e263)
 
 **Question 5**
----
-<img width="656" height="532" alt="image" src="https://github.com/user-attachments/assets/9276b2df-4fd4-4ff5-a440-2043514a01dd" />
+Write the SQL query that accomplishes the grouping of data by age, calculates the maximum income for each age group, and includes only those age groups where the maximum income is greater than 2,000,000.
 
-```sql
-SELECT name AS fruit_name, inventory AS lowest_quantity
-FROM fruits
-ORDER BY inventory ASC
-LIMIT 1;
-```
+Sample table: employee
 
-**Output:**
-
-<img width="730" height="299" alt="image" src="https://github.com/user-attachments/assets/45f0093f-9ebb-45bb-a3ed-2333e42cef9b" />
-
-**Question 6**
----
-<img width="749" height="454" alt="image" src="https://github.com/user-attachments/assets/fb7b9bf9-d816-4a74-870d-7f30bf23da1b" />
-
-```sql
-SELECT AVG(LENGTH(email)) AS avg_email_length
-FROM customer
-```
-
-**Output:**
-
-<img width="462" height="302" alt="image" src="https://github.com/user-attachments/assets/32dbe5f8-a782-4458-9c62-a55562262b0f" />
-
-**Question 7**
----
-<img width="1026" height="539" alt="image" src="https://github.com/user-attachments/assets/abd2fa4f-85db-4cb2-9646-483669cd7eeb" />
-
-```sql
-SELECT MAX(price)-MIN(price) AS price_diff
-FROM fruits
-```
-
-**Output:**
-
-<img width="577" height="339" alt="image" src="https://github.com/user-attachments/assets/99061384-5429-48a0-bfa6-6b8ea140d509" />
-
-**Question 8**
----
-<img width="1199" height="281" alt="image" src="https://github.com/user-attachments/assets/68d3b094-d359-49f6-a64c-7ee70d763a7c" />
-
-```sql
-SELECT age, SUM(income) 
+![image](https://github.com/user-attachments/assets/15eaa93f-2263-40b6-bd81-7488b1f2a65c)
+~~~
+SELECT age, MAX(income) AS 'MAX(income)'
 FROM employee
 GROUP BY age
-HAVING SUM(income) > 1000000;
-```
+HAVING MAX(income) > 2000000;
+~~~
 
 **Output:**
 
-<img width="617" height="403" alt="image" src="https://github.com/user-attachments/assets/3c702956-8c4f-445c-b11a-8e7e33cdfa6f" />
+![image](https://github.com/user-attachments/assets/f37a3da9-6e90-419f-befc-d0eeeb1fa312)
+
+
+**Question 6**
+Write the SQL query that accomplishes the selection of number of products for each category from products table which includes only those products where the category ID is greater than 2.
+
+Sample table: products
+
+![image](https://github.com/user-attachments/assets/042e49b9-6623-459e-b953-57088965246d)
+
+~~~
+SELECT category_id, COUNT(*) AS COUNT
+FROM products
+WHERE category_id > 2
+GROUP BY category_id;
+~~~
+
+**Output:**
+![image](https://github.com/user-attachments/assets/8c58d744-9066-432c-9f73-1eda446f66df)
+
+
+
+**Question 7**
+Write a SQL Query to find how many medications are prescribed for each patient?
+
+Sample table:MedicalRecords Table
+
+![image](https://github.com/user-attachments/assets/271b0f32-9d6b-4026-a0bc-79ff2b2a9b72)
+~~~
+SELECT PatientID,COUNT(medications) AS AvgMedications
+FROM MedicalRecords
+GROUP BY PatientID;
+~~~
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/a2a7478f-ab2e-4af6-be6d-959084185afb)
+
+**Question 8**
+How many prescriptions were written in each frequency category (e.g., once daily, twice daily)?
+Sample tablePrescriptions Table
+![image](https://github.com/user-attachments/assets/63e13b53-4879-4a1e-ad4c-4057ba1ef7c1)
+~~~
+SELECT Frequency,COUNT(Frequency) AS  TotalPrescriptions
+FROM Prescriptions 
+GROUP BY Frequency;
+~~~
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/f01920a5-ee06-4a9c-8864-aa5d6f8700ad)
+
 
 **Question 9**
----
-<img width="1182" height="542" alt="image" src="https://github.com/user-attachments/assets/20640768-9d7c-44dd-86bd-9d32b80a5082" />
+What is the total number of appointments scheduled by each doctor?
 
-```sql
-SELECT occupation, SUM(workhour) 
-FROM employee1
-GROUP BY occupation
-HAVING SUM(workhour) > 20;
-```
+Sample table:Appointments Table
+![image](https://github.com/user-attachments/assets/e1c0ca74-ec1a-4d65-8081-36ae3dc39099)
+~~~
+SELECT DoctorID,COUNT(*) AS TotalAppointments
+FROM Appointments 
+GROUP BY DoctorID;
+~~~
 
 **Output:**
+![image](https://github.com/user-attachments/assets/e24bca3c-0a16-4ca7-9e86-674bb675844a)
 
-<img width="705" height="449" alt="image" src="https://github.com/user-attachments/assets/54e1caeb-6a24-49ef-a8bb-07bc107ece79" />
+
 
 **Question 10**
----
-<img width="1229" height="462" alt="image" src="https://github.com/user-attachments/assets/5326e28e-817c-4cf0-a3da-b2ead9d7125e" />
+Write a SQL query to return the total number of rows in the 'customer' table where the city is Noida.
+Sample table: customer
+![image](https://github.com/user-attachments/assets/dbb27646-4b8d-4c18-8827-5659cfae35fe)
+~~~
+select count(city)as COUNT
+from customer
+where city='Noida';
+~~~
 
-```sql
-SELECT (age / 5) * 5 AS age_group, MIN(age)
-FROM customer1
-GROUP BY age_group
-Having MIN(age)<25;
-```
 
 **Output:**
+![image](https://github.com/user-attachments/assets/04e98da2-e773-4544-8c2b-6bdca5090687)
 
-<img width="570" height="289" alt="image" src="https://github.com/user-attachments/assets/088159d0-7362-4bd8-bccc-0a7f1fed9a05" />
 
 
-## Grade
-  <img width="1359" height="99" alt="image" src="https://github.com/user-attachments/assets/136586e4-8d82-42f4-89ae-0558f769193e" />
 
 
 ## RESULT
